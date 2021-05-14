@@ -14,15 +14,12 @@ class ChatData extends Migration
     public function up()
     {
         Schema::create('chat_data', function (Blueprint $table) {
-            $table->increments("chat_id");
+            $table->increments("chat_id")->autoIncrement();
+            $table->foreignId('id')->constrained('users');
             $table->string('title',"32");
             $table->string("text_body","128");
-            $table->id();
-            $table->timestamps();
-
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->rememberToken();
+            $table->ipAddress('visitor');
+            $table->bigInteger('reply_id')->nullable();
             $table->timestamps();
         });
     }
